@@ -3,7 +3,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+//static folder for public assest.
 app.use(express.static('public'));
+
+//Body parser middleware.
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/redirect', (req, res, next) => {
