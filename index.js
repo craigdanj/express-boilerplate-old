@@ -9,6 +9,7 @@ app.use(express.static('public'));
 //Body parser middleware.
 app.use(bodyParser.urlencoded({extended: false}));
 
+//Test routes
 app.use('/redirect', (req, res, next) => {
     console.log('redirecting to home');
     res.redirect('/');
