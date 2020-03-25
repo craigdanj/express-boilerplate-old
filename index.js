@@ -8,6 +8,9 @@ const shopRoutes = require('./routes/shop');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views'); //You don't really need this. Its just for demonstration.
+
 //static folder for public assest.
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -20,7 +23,7 @@ app.use(shopRoutes);
 
 app.use((req, res ,next) => {
     //The 404 route
-    res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
+    res.status(404).render('404');
 });
 
 app.listen(3000);
