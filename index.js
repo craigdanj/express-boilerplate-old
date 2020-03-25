@@ -9,7 +9,7 @@ const shopRoutes = require('./routes/shop');
 const app = express();
 
 //static folder for public assest.
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Body parser middleware.
 app.use(bodyParser.urlencoded({extended: false}));
