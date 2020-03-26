@@ -2,12 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-router.use('/add-book', (req, res, next) => {
-    res.send(`<form method="post" action="/book-added">
-        <input type="text" name="bookName" />
-        <input type="submit" value="Send">
-    </form>`);
-});
+const booksController = require('../controllers/books');
+
+router.use('/add-book', booksController.addBook);
 
 router.post('/book-added', (req, res, next) => {
     console.log(req.body);
