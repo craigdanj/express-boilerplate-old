@@ -6,14 +6,9 @@ const booksController = require('../controllers/books');
 
 router.use('/add-book', booksController.addBook);
 
-router.post('/book-added', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/books');
-});
+router.post('/book-added', booksController.bookAdded);
 
-router.use('/books', (req, res, next) => {
-    res.send('<h1>Books</h1>');
-});
+router.use('/books', booksController.books);
 
 
 module.exports = router;

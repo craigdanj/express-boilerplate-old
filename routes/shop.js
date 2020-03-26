@@ -2,16 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
+const shopController = require('../controllers/shop');
+
 //Test routes
-router.get('/redirect', (req, res, next) => {
-    console.log('redirecting to home');
-    res.redirect('/');
-});
+router.get('/redirect', shopController.redirect);
 
 
-router.get('/', (req, res, next) => {
-    res.send('<h1>Home</h1>');
-});
+router.get('/', shopController.home);
 
 
 
