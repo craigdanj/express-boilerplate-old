@@ -1,3 +1,5 @@
+const Book = require("../models/book");
+
 exports.addBook = (req, res, next) => {
     res.send(`<form method="post" action="/book-added">
         <input type="text" name="bookName" />
@@ -11,5 +13,5 @@ exports.bookAdded = (req, res, next) => {
 }
 
 exports.books = (req, res, next) => {
-    res.send('<h1>Books</h1>');
+    res.send('<h1>Books</h1>', { books: []});
 };
