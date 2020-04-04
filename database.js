@@ -9,6 +9,7 @@ const sequelize = new Sequelize('db', null, null, {
 	operatorsAliases: 0
 });
 
+//Test the connection
 sequelize
 	.authenticate()
 	.then(() => {
