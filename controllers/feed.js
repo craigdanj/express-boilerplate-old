@@ -1,13 +1,20 @@
 const { validationResult } = require('express-validator');
-const postModel = require('../models/post');
+const Post = require('../models/post');
 
 exports.getPosts = (req, res, next) => {
-    res.status(200).json({
-        posts: [
-            {content: "The first post"},
-            {content: "The second post"}
-        ]
-    });
+    Post.findAndCountAll()
+        .then(posts => {
+            const postRows = posts.rows;
+            const total = posts.count;
+
+            res.status(200).json({
+                posts: postRows,
+                total
+            });
+        })
+        .catch( err => {
+            console.log(err);
+        });
 };
 
 exports.createPost = (req, res, next) => {
