@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const sequelize = require('./database');
 
 const feedRoutes = require('./routes/feed');
 
@@ -18,9 +19,19 @@ app.use((req, res ,next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorisation');
     next();
-})
+});
 
 //Routes
 app.use('/feed', feedRoutes);
 
-app.listen(3000);
+//Sync db and start server.
+sequelize
+    .sync()
+    .then(result => {
+        app.listen(3000, ()=> {
+            console.log("Server up and running at http://localhost:3000");
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
