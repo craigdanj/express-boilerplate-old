@@ -25,14 +25,23 @@ exports.createPost = (req, res, next) => {
             errors: errors.array()
         })
     }
-    res.status(201).json({
-        data: [
-            {
-                message: "Post created successfully",
-                post: {
-                    content: req.body.content
-                }
-            }
-        ]
-    });
+
+    Post.create({ content: req.body.content })
+        .then(post => {
+            res.status(201).json({
+                data: [
+                    {
+                        message: "Post created successfully",
+                        post: {
+                            id: post.dataValues.id,
+                            content: post.dataValues.content
+                        }
+                    }
+                ]
+            });
+        })
+        .catch( err => {
+            console.log(err);
+        });
+
 };
