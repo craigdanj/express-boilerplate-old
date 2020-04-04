@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
 //Connect to the db
+//You can swap out SQLite with any SQL databse supported by sequelize
 const sequelize = new Sequelize('db', null, null, {
 	host: 'localhost',
 	dialect: 'sqlite',

@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const sequelize = require('./database');
 
+const sequelize = require('./database');
 const feedRoutes = require('./routes/feed');
 
 const app = express();
