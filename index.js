@@ -1,27 +1,26 @@
-const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
-const rootDir = require('./utils/path');
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const commonController = require('./controllers/common');
+const feedRoutes = require('./routes/feed');
 
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', 'views'); //You don't really need this. Its just for demonstration.
+//Body parser middleware.
+app.use(bodyParser.json());
 
-//static folder for public assest.
+//Static folder for public assest.
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Body parser middleware.
-app.use(bodyParser.urlencoded({extended: false}));
+//CORS Headers
+app.use((req, res ,next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorisation');
+    next();
+})
 
 //Routes
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
-
-app.use(commonController.get404);
+app.use('/feed', feedRoutes);
 
 app.listen(3000);
